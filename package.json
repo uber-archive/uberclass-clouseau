@@ -1,0 +1,25 @@
+{
+	"name": "uberclass-profiler",
+	"description": "A subclass of uberclass that adds profiling support",
+	"homepage": "https://github.com/uber/uberclass-profiler",
+	"author": "David Ellis <ellis@uber.com>",
+	"version": "0.0.1",
+	"main": "./lib/uberclass-profiler",
+	"dependencies": {
+		"uberclass": "1.0.1",
+		"profiler": "git+ssh://git@github.com:uber/profiler",
+		"rubberduck": "0.1.0"
+	},
+	"devDependencies": {
+		"docco": "*",
+		"nodeunit": "*"
+	},
+	"engines": {
+		"node": "*"
+	},
+	"scripts": {
+		"prepublish": "npm test && docco ./lib/uberclass-profiler.js && git commit -am \"Automatic doc and minification for version $npm_package_version\" && git tag $npm_package_version && git push && git push --tags",
+		"test": "nodeunit ./test/uberclass-profiler_test.js"
+	},
+	"private": true
+}
