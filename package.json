@@ -3,12 +3,12 @@
 	"description": "A subclass of uberclass that adds profiling support",
 	"homepage": "https://github.com/uber/uberclass-profiler",
 	"author": "David Ellis <ellis@uber.com>",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"main": "./lib/uberclass-profiler",
 	"dependencies": {
 		"uberclass": "1.0.1",
 		"profiler": "git+ssh://git@github.com:uber/profiler",
-		"rubberduck": "0.1.0"
+		"rubberduck": "0.2.0"
 	},
 	"devDependencies": {
 		"docco": "*",
