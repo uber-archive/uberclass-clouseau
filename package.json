@@ -1,25 +1,25 @@
 {
-	"name": "uberclass-profiler",
+	"name": "uberclass-clouseau",
 	"description": "A subclass of uberclass that adds profiling support",
-	"homepage": "https://github.com/uber/uberclass-profiler",
-	"author": "David Ellis <ellis@uber.com>",
+	"homepage": "https://github.com/uber/uberclass-clouseau",
+	"author": "David Ellis <d.f.ellis@ieee.org>",
 	"version": "0.0.2",
-	"main": "./lib/uberclass-profiler",
+	"main": "./lib/uberclass-clouseau",
 	"dependencies": {
 		"uberclass": "1.0.1",
-		"profiler": "git+ssh://git@github.com:uber/profiler",
+		"clouseau": "0.1.3",
 		"rubberduck": "0.2.0"
 	},
 	"devDependencies": {
 		"docco": "*",
-		"nodeunit": "*"
+		"nodeunit": "*",
+        "uglify-js": "*"
 	},
 	"engines": {
 		"node": "*"
 	},
 	"scripts": {
-		"prepublish": "npm test && docco ./lib/uberclass-profiler.js && git commit -am \"Automatic doc and minification for version $npm_package_version\" && git tag $npm_package_version && git push && git push --tags",
-		"test": "nodeunit ./test/uberclass-profiler_test.js"
-	},
-	"private": true
+		"prepublish": "npm test && docco ./lib/uberclass-clouseau.js && uglifyjs ./lib/uberclass-clouseau.js > ./lib/uberclass-clouseau.min.js && git commit -am \"Automatic doc and minification for version $npm_package_version\" && git tag $npm_package_version && git push && git push --tags",
+		"test": "nodeunit ./test/test.js"
+	}
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>  <html> <head>   <title>uberclass-clouseau.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               uberclass-clouseau.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">Class</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;uberclass&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">rubberduck</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;rubberduck&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">Profiler</span> <span class="o">=</span> <span class="nx">global</span><span class="p">.</span><span class="nx">Profiler</span> <span class="o">=</span> <span class="nx">global</span><span class="p">.</span><span class="nx">Profiler</span> <span class="o">||</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;clouseau&#39;</span><span class="p">);</span> <span class="c1">// Must be a singleton, bootstrap Profiler if necessary</span>
+<span class="nx">global</span><span class="p">.</span><span class="nx">__f</span> <span class="o">=</span> <span class="nx">global</span><span class="p">.</span><span class="nx">__f</span> <span class="o">||</span> <span class="nx">Profiler</span><span class="p">.</span><span class="nx">__f</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">profilerEnabled</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">!!</span><span class="nx">Profiler</span> <span class="o">&amp;&amp;</span> <span class="nx">Profiler</span><span class="p">.</span><span class="nx">enabled</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">originalExtend</span> <span class="o">=</span> <span class="nx">Class</span><span class="p">.</span><span class="nx">Class</span><span class="p">.</span><span class="nx">extend</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">newExtend</span><span class="p">(</span><span class="kr">static</span><span class="p">,</span> <span class="nx">proto</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="kr">static</span><span class="p">)</span> <span class="kr">static</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">proto</span><span class="p">)</span> <span class="nx">proto</span> <span class="o">=</span> <span class="kr">static</span><span class="p">,</span> <span class="kr">static</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="nx">proto</span><span class="p">.</span><span class="nx">ClassName</span> <span class="o">=</span> <span class="nx">proto</span><span class="p">.</span><span class="nx">ClassName</span> <span class="o">||</span> <span class="s1">&#39;anonymous&#39;</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">newObj</span> <span class="o">=</span> <span class="nx">originalExtend</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="p">[</span><span class="kr">static</span><span class="p">,</span> <span class="nx">proto</span><span class="p">]);</span>
+
+  <span class="kd">var</span> <span class="nx">staticEmitter</span> <span class="o">=</span> <span class="nx">rubberduck</span><span class="p">.</span><span class="nx">emitter</span><span class="p">(</span><span class="nx">newObj</span><span class="p">).</span><span class="nx">punch</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="kr">static</span><span class="p">),</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">protoEmitter</span> <span class="o">=</span> <span class="nx">rubberduck</span><span class="p">.</span><span class="nx">emitter</span><span class="p">(</span><span class="nx">newObj</span><span class="p">.</span><span class="nx">prototype</span><span class="p">).</span><span class="nx">punch</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">proto</span><span class="p">),</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+  
+  <span class="kd">function</span> <span class="nx">beforeHandler</span><span class="p">(</span><span class="nx">args</span><span class="p">,</span> <span class="nx">instance</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">profilerEnabled</span><span class="p">())</span> <span class="nx">Profiler</span><span class="p">.</span><span class="nx">enter</span><span class="p">(</span><span class="nx">newObj</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">ClassName</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kd">function</span> <span class="nx">afterHandler</span><span class="p">(</span><span class="nx">val</span><span class="p">,</span> <span class="nx">args</span><span class="p">,</span> <span class="nx">instance</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">profilerEnabled</span><span class="p">())</span> <span class="nx">Profiler</span><span class="p">.</span><span class="nx">exit</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="nx">staticEmitter</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;before&#39;</span><span class="p">,</span> <span class="nx">beforeHandler</span><span class="p">);</span>
+  <span class="nx">protoEmitter</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;before&#39;</span><span class="p">,</span> <span class="nx">beforeHandler</span><span class="p">);</span>
+
+  <span class="nx">staticEmitter</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;after&#39;</span><span class="p">,</span> <span class="nx">afterHandler</span><span class="p">);</span>
+  <span class="nx">protoEmitter</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;after&#39;</span><span class="p">,</span> <span class="nx">afterHandler</span><span class="p">);</span>
+  
+  <span class="k">return</span> <span class="nx">newObj</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">Class</span><span class="p">.</span><span class="nx">Class</span><span class="p">.</span><span class="nx">extend</span> <span class="o">=</span> <span class="nx">newExtend</span><span class="p">;</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">Class</span><span class="p">.</span><span class="nx">extend</span><span class="p">({});</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
