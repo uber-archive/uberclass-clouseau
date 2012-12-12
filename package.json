@@ -2,8 +2,11 @@
 	"name": "uberclass-clouseau",
 	"description": "A subclass of uberclass that adds profiling support",
 	"homepage": "https://github.com/uber/uberclass-clouseau",
-	"author": "David Ellis <d.f.ellis@ieee.org>",
-	"version": "0.0.2",
+	"contributors": [
+        "David Ellis <d.f.ellis@ieee.org>",
+        "Jason Roberts <jasonr11@gmail.com>"
+    ],
+	"version": "0.0.3",
 	"main": "./lib/uberclass-clouseau",
 	"dependencies": {
 		"uberclass": "1.0.1",
