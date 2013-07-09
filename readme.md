@@ -1,4 +1,4 @@
-# uberclass-clouseau [![NPM version](https://badge.fury.io/js/uberclass-clouseau.png)](http://badge.fury.io/js/uberclass-clouseau) [![Dependency Status](https://gemnasium.com/uber/uberclass-clouseau.png)](https://gemnasium.com/uber/uberclass-clouseau)
+# uberclass-clouseau [![NPM version](https://badge.fury.io/js/uberclass-clouseau.png)](http://badge.fury.io/js/uberclass-clouseau) [![Dependency Status](https://gemnasium.com/uber/uberclass-clouseau.png)](https://gemnasium.com/uber/uberclass-clouseau) [![Build Status](https://travis-ci.org/uber/uberclass-clouseau.png?branch=master)](https://travis-ci.org/uber/uberclass-clouseau)
 
 A subclass of uberclass that adds profiling support.
 
