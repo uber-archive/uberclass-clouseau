@@ -19,7 +19,7 @@
         "uglify-js": "*"
 	},
 	"engines": {
-		"node": "*"
+		"node": ">=0.8"
 	},
 	"scripts": {
 		"realpublish": "npm test && docco ./lib/uberclass-clouseau.js && uglifyjs ./lib/uberclass-clouseau.js > ./lib/uberclass-clouseau.min.js && git commit -am \"Automatic doc and minification for version $npm_package_version\" && git tag $npm_package_version && git push && git push --tags && npm publish",
