@@ -1,4 +1,4 @@
-# uberclass-clouseau
+# uberclass-clouseau [![NPM version](https://badge.fury.io/js/uberclass-clouseau.png)](http://badge.fury.io/js/uberclass-clouseau) [![Dependency Status](https://gemnasium.com/uber/uberclass-clouseau.png)](https://gemnasium.com/uber/uberclass-clouseau)
 
 A subclass of uberclass that adds profiling support.
 
@@ -23,7 +23,7 @@ A subclass of uberclass that adds profiling support.
 
 ## License (MIT)
 
-Copyright (C) 2012 by Uber Technologies, Inc.
+Copyright (C) 2012-2013 by Uber Technologies, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
